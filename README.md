@@ -1,22 +1,41 @@
-# Assignment 4
+# Image Retrieval Application
 
-image retrieval on basis of text is working
-image retrieval on basis of image is working
+This repository contains the code for an Image Retrieval Application that leverages text-based image retrieval and image-based similarity search functionalities. The application is designed to compute embeddings for images from the DeepFashion dataset, store them using PINECONE, and allow users to interact with the system through a user-friendly interface.
+1. [CodeLabs Link](https://codelabs-preview.appspot.com/?file_id=1Ww3bBMuvr5AdwmC-yPtXWK67wCeVEtW54jPR4uboBBg#0)
+2. [Streamlit Application]()
 
-I am getting the correct ID's. Actually fetching the images from the AWS is still left
 
-to run this application, 
+## Installation
 
-First install requirments.txt
+To run this application, follow these steps:
 
-```pip install -r requirements.txt```
+1. Install the required dependencies by running the following command in your terminal:
 
-Then, open 2 new terminals
+   ```bash
+   pip install -r requirements.txt
+    ```
+2. Open two new terminals for concurrent processes.
 
-in terminal 1 
+    In Terminal 1, run the Streamlit application:
+    ```bash
+    streamlit run Hello.py
+    ```
+3. In Terminal 2, run the FastAPI application using Uvicorn:
+    ```bash
+    uvicorn app:app --reload
+   ```
+    This will launch the FastAPI server, enabling the backend logic for efficient image retrieval based on user requests. 
 
-```streamlit run Hello.py```
+## Usage
+Once both processes are running, navigate to the provided Streamlit app URL (usually http://localhost:8501) in your web browser. The app will guide you through text-based image retrieval and image-based similarity search functionalities.
 
-in terminal 2
+- For text-based image retrieval, enter a descriptive text in the input field and click the appropriate button to retrieve the closest matching image.
 
-```uvicorn app:app --reload```
+- For image-based similarity search, either upload an image or provide a URL. Click the corresponding button to find three other images similar to the uploaded one.
+
+Explore the rich world of image retrieval with this application!
+
+# Background Information
+The application utilizes PINECONE for efficient storage and retrieval of image embeddings, and images are securely stored in an Amazon S3 bucket. The FastAPI backend seamlessly integrates with the Streamlit frontend, providing a smooth and responsive user experience.
+
+Feel free to customize and extend this application based on your specific requirements and use cases. Happy exploring!
