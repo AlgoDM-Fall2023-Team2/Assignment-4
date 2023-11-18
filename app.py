@@ -16,8 +16,6 @@ def retrieve_closest_image(text: str):
 
     encoded_text = encode_search_query(text)
 
-    print(encoded_text)
-
     closest_image_ids = index.query(
         vector=encoded_text,
         top_k=3,

@@ -1,11 +1,10 @@
 import streamlit as st
 import requests
-import clip
-from process_input import encode_image_query
-from PIL import Image
+from s3_fetch import download_image_from_s3
 
 fastapi_url = "http://localhost:8000"
-s3_bucket_url = "s3://bucketforclip/images/"
+s3_bucket_name = "bucketforclip"
+
 
 def retrieve_closest_image(text):
     response = requests.get(f"{fastapi_url}/retrieve_closest_image", params={"text": text})
@@ -21,11 +20,12 @@ def main():
 
     text_input = st.text_input("Enter text description:")
     if st.button("Retrieve Closest Image"):
-        closest_image = retrieve_closest_image(text_input)
-        st.write(closest_image)
+        closest_images = retrieve_closest_image(text_input)
+        st.write(closest_images)
 
-        for similar_image in similar_images:
-            st.image(f"{s3_bucket_url}{similar_image}.jpg")
+        for closest_image in closest_images:
+            image_data = download_image_from_s3(s3_bucket_name, f'images/{closest_image}.jpg')
+            st.image(image_data)
 
     uploaded_file = st.file_uploader("Upload Image", type=["jpg", "jpeg"])
     if uploaded_file is not None:

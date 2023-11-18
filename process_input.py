@@ -12,8 +12,6 @@ def encode_search_query(search_query):
         text_encoded = model.encode_text(clip.tokenize(search_query).to(device))
         text_encoded /= text_encoded.norm(dim=-1, keepdim=True)
 
-    print(text_encoded.shape)
-
     return text_encoded.tolist()
 
 def encode_image_query():
