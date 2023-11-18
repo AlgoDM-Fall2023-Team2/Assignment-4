@@ -1,5 +1,7 @@
 import clip
 import torch
+from PIL import Image
+from io import BytesIO
 
 device = "cuda" if torch.cuda.is_available() else "cpu"
 model, preprocess = clip.load("ViT-B/32", device=device)
@@ -14,11 +16,14 @@ def encode_search_query(search_query):
 
     return text_encoded.tolist()
 
-def encode_image_query(img):
+def encode_image_query():
 
     print("image encoding has started")
 
-    #image_vector = encode_image_query(img)
+    with open("img.jpg", "rb") as f:
+        image_bytes = f.read()
+
+    img = Image.open(BytesIO(image_bytes))
     
     image_preprocessed = preprocess(img).to(device)
     image_preprocessed = image_preprocessed.unsqueeze(0)

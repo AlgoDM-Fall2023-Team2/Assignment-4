@@ -1,7 +1,9 @@
 # Assignment 4
 
 image retrieval on basis of text is working
-image retrieval on basis of image is not working
+image retrieval on basis of image is working
+
+I am getting the correct ID's. Actually fetching the images from the AWS is still left
 
 to run this application, 
 
