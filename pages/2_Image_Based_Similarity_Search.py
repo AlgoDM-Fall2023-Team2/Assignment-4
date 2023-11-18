@@ -29,7 +29,7 @@ st.markdown("---")
 
 
 fastapi_url = "http://localhost:8000"
-s3_bucket_name = "bucketforclip"
+s3_bucket_name = "smalladmbucket"
 
 def retrieve_similar_images():
     response = requests.get(f"{fastapi_url}/retrieve_similar_images")
@@ -48,7 +48,8 @@ if uploaded_file is not None:
 
         similar_images = retrieve_similar_images()
 
-        st.write(similar_images)
+        #t.write(similar_images)
 
         for similar_image in similar_images:
-            st.image(f"{s3_bucket_url}{similar_image}.jpg")
+            image_data = download_image_from_s3(s3_bucket_name, f'img/{similar_image}.jpg')
+            st.image(image_data)

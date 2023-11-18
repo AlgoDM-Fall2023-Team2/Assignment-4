@@ -1,5 +1,6 @@
 import streamlit as st
 import requests
+from s3_fetch import download_image_from_s3
 
 st.set_page_config(layout="wide", page_title="Text Based Image Retrieval")
 st.title("Text Based Image Retrieval")
@@ -26,7 +27,7 @@ st.markdown(markdown_content)
 st.markdown("---")
 
 fastapi_url = "http://localhost:8000"
-s3_bucket_name = "bucketforclip"
+s3_bucket_name = "smalladmbucket"
 
 
 def retrieve_closest_image(text):
@@ -37,8 +38,8 @@ st.markdown("## Enter text description:")
 text_input = st.text_input("Enter text description:", label_visibility="hidden")
 if st.button("Retrieve Closest Image"):
     closest_images = retrieve_closest_image(text_input)
-    st.write(closest_images)
+    #st.write(closest_images)
 
     for closest_image in closest_images:
-        image_data = download_image_from_s3(s3_bucket_name, f'images/{closest_image}.jpg')
+        image_data = download_image_from_s3(s3_bucket_name, f'img/{closest_image}.jpg')
         st.image(image_data)
