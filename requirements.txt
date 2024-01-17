@@ -77,7 +77,7 @@ typing-extensions==4.8.0
 tzdata==2023.3
 tzlocal==5.2
 ujson==5.8.0
-urllib3==2.1.0
+urllib3==1.25.4
 uvicorn==0.24.0.post1
 validators==0.22.0
 watchdog==3.0.0
@@ -86,4 +86,3 @@ wcwidth==0.2.10
 websockets==12.0
 win32-setctime==1.1.0
 zipp==3.17.0
-boto3
