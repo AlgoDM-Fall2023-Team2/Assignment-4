@@ -2,10 +2,10 @@ from fastapi import FastAPI
 import pinecone
 from process_input import encode_search_query, encode_image_query
 
-#pinecone.init(api_key = "751e7796-d00e-4382-98aa-557196118a24", environment="gcp-starter")
-pinecone.init(api_key = "bb5c549b-3015-44a6-9e7b-f7939252ffbc", environment="gcp-starter")
+pinecone.init(api_key = "751e7796-d00e-4382-98aa-557196118a24", environment="gcp-starter")
+#pinecone.init(api_key = "bb5c549b-3015-44a6-9e7b-f7939252ffbc", environment="gcp-starter")
 
-index = pinecone.Index("vectors")
+index = pinecone.Index("vector")
 
 app = FastAPI()
 

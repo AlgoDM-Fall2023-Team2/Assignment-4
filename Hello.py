@@ -1,9 +1,12 @@
 import streamlit as st
 import requests
 from s3_fetch import download_image_from_s3
+import subprocess
+
+subprocess.Popen(["uvicorn", "app:app", "--reload"])
 
 fastapi_url = "http://localhost:8000"
-s3_bucket_name = "bucketforclip"
+s3_bucket_name = "smalladmbucket"
 
 
 def retrieve_closest_image(text):
@@ -24,7 +27,7 @@ def main():
         st.write(closest_images)
 
         for closest_image in closest_images:
-            image_data = download_image_from_s3(s3_bucket_name, f'images/{closest_image}.jpg')
+            image_data = download_image_from_s3(s3_bucket_name, f'img/{closest_image}.jpg')
             st.image(image_data)
 
     uploaded_file = st.file_uploader("Upload Image", type=["jpg", "jpeg"])
@@ -42,7 +45,8 @@ def main():
             st.write(similar_images)
 
             for similar_image in similar_images:
-                st.image(f"{s3_bucket_url}{similar_image}.jpg")
+                image_data = download_image_from_s3(s3_bucket_name, f'img/{similar_image}.jpg')
+                st.image(image_data)
 
 if __name__ == "__main__":
     main()
