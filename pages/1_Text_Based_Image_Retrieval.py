@@ -1,6 +1,8 @@
 import streamlit as st
 import requests
 from s3_fetch import download_image_from_s3
+from PIL import Image
+from io import BytesIO
 
 st.set_page_config(layout="wide", page_title="Text Based Image Retrieval")
 st.title("Text Based Image Retrieval")
@@ -38,8 +40,9 @@ st.markdown("## Enter text description:")
 text_input = st.text_input("Enter text description:", label_visibility="hidden")
 if st.button("Retrieve Closest Image"):
     closest_images = retrieve_closest_image(text_input)
-    #st.write(closest_images)
 
     for closest_image in closest_images:
         image_data = download_image_from_s3(s3_bucket_name, f'img/{closest_image}.jpg')
-        st.image(image_data)
+        image = Image.open(BytesIO(image_data))
+        image = image.resize((200, 200))
+        st.image(image)

@@ -1,6 +1,8 @@
 import streamlit as st
 import requests
 from s3_fetch import download_image_from_s3
+from PIL import Image
+from io import BytesIO
 
 
 st.set_page_config(layout="wide", page_title="Image-Based Similarity Search")
@@ -48,8 +50,8 @@ if uploaded_file is not None:
 
         similar_images = retrieve_similar_images()
 
-        #t.write(similar_images)
-
         for similar_image in similar_images:
             image_data = download_image_from_s3(s3_bucket_name, f'img/{similar_image}.jpg')
+            image = Image.open(BytesIO(image_data))
+            image = image.resize((200, 200))
             st.image(image_data)
