@@ -3,15 +3,16 @@ import pinecone
 from process_input import encode_search_query, encode_image_query
 from dotenv import load_dotenv
 import os
+import streamlit as st
 
 load_dotenv()
 
-PINECONE_API_KEY = os.getenv("PINECONE_API_KEY")
-PINECONE_ENVIRONMENT = os.getenv("PINECONE_ENVIRONMENT")
+PINECONE_API_KEY = st.secrets["PINECONE_API_KEY"]
+PINECONE_ENVIRONMENT = st.secrets["PINECONE_ENVIRONMENT"]
 
 pinecone.init(api_key = PINECONE_API_KEY, environment = PINECONE_ENVIRONMENT)
 
-PINECONE_INDEX = os.getenv("PINECONE_INDEX")
+PINECONE_INDEX = st.secrets["PINECONE_INDEX"]
 
 index = pinecone.Index(PINECONE_INDEX)
 

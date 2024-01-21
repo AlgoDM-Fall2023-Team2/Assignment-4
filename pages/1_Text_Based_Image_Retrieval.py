@@ -32,9 +32,8 @@ Give it a try and experience the power of text-based image retrieval with our in
 st.markdown(markdown_content)
 st.markdown("---")
 
-FASTAPI_URL = os.getenv("FASTAPI_URL")
-S3_BUCKET_NAME = os.getenv("S3_BUCKET_NAME")
-
+FASTAPI_URL = st.secrets["FASTAPI_URL"]
+S3_BUCKET_NAME = st.secrets["S3_BUCKET_NAME"]
 
 def retrieve_closest_image(text):
     response = requests.get(f"{FASTAPI_URL}/retrieve_closest_image", params={"text": text})
