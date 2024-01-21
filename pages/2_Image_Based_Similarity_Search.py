@@ -3,6 +3,10 @@ import requests
 from s3_fetch import download_image_from_s3
 from PIL import Image
 from io import BytesIO
+from dotenv import load_dotenv
+import os
+
+load_dotenv()
 
 
 st.set_page_config(layout="wide", page_title="Image-Based Similarity Search")
@@ -30,11 +34,11 @@ st.markdown(markdown_content)
 st.markdown("---")
 
 
-fastapi_url = "http://localhost:8000"
-s3_bucket_name = "smalladmbucket"
+FASTAPI_URL = os.getenv("FASTAPI_URL")
+S3_BUCKET_NAME = os.getenv("S3_BUCKET_NAME")
 
 def retrieve_similar_images():
-    response = requests.get(f"{fastapi_url}/retrieve_similar_images")
+    response = requests.get(f"{FASTAPI_URL}/retrieve_similar_images")
     return response.json()
 
 st.markdown("## Upload Image:")
@@ -51,7 +55,7 @@ if uploaded_file is not None:
         similar_images = retrieve_similar_images()
 
         for similar_image in similar_images:
-            image_data = download_image_from_s3(s3_bucket_name, f'img/{similar_image}.jpg')
+            image_data = download_image_from_s3(S3_BUCKET_NAME, f'img/{similar_image}.jpg')
             image = Image.open(BytesIO(image_data))
             image = image.resize((200, 200))
             st.image(image_data)

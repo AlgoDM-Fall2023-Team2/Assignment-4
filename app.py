@@ -1,15 +1,21 @@
 from fastapi import FastAPI
 import pinecone
 from process_input import encode_search_query, encode_image_query
+from dotenv import load_dotenv
+import os
 
-pinecone.init(api_key = "751e7796-d00e-4382-98aa-557196118a24", environment="gcp-starter")
-#pinecone.init(api_key = "bb5c549b-3015-44a6-9e7b-f7939252ffbc", environment="gcp-starter")
+load_dotenv()
 
-index = pinecone.Index("vector")
+PINECONE_API_KEY = os.getenv("PINECONE_API_KEY")
+PINECONE_ENVIRONMENT = os.getenv("PINECONE_ENVIRONMENT")
+
+pinecone.init(api_key = PINECONE_API_KEY, environment = PINECONE_ENVIRONMENT)
+
+PINECONE_INDEX = os.getenv("PINECONE_INDEX")
+
+index = pinecone.Index(PINECONE_INDEX)
 
 app = FastAPI()
-
-s3_bucket_url = "https://your-s3-bucket-url.s3.amazonaws.com/"
 
 @app.get("/retrieve_closest_image")
 def retrieve_closest_image(text: str):
