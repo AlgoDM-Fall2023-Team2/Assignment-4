@@ -2,7 +2,7 @@
 
 This repository contains the code for an Image Retrieval Application that leverages text-based image retrieval and image-based similarity search functionalities. The application is designed to compute embeddings for images from the DeepFashion dataset, store them using PINECONE, and allow users to interact with the system through a user-friendly interface.
 1. [CodeLabs Link](https://codelabs-preview.appspot.com/?file_id=1Ww3bBMuvr5AdwmC-yPtXWK67wCeVEtW54jPR4uboBBg#0)
-2. [Streamlit Application]()
+2. [Streamlit Application](https://multimodal-content-similarity.streamlit.app/)
 
 
 ## Installation

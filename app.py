@@ -2,10 +2,7 @@ from fastapi import FastAPI
 import pinecone
 from process_input import encode_search_query, encode_image_query
 from dotenv import load_dotenv
-import os
 import streamlit as st
-
-load_dotenv()
 
 PINECONE_API_KEY = st.secrets["PINECONE_API_KEY"]
 PINECONE_ENVIRONMENT = st.secrets["PINECONE_ENVIRONMENT"]

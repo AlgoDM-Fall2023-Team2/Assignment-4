@@ -3,10 +3,6 @@ import requests
 from s3_fetch import download_image_from_s3
 from PIL import Image
 from io import BytesIO
-from dotenv import load_dotenv
-import os
-
-load_dotenv()
 
 st.set_page_config(layout="wide", page_title="Text Based Image Retrieval")
 st.title("Text Based Image Retrieval")

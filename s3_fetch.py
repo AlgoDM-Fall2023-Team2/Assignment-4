@@ -2,9 +2,6 @@ import streamlit as st
 import boto3
 from botocore.exceptions import NoCredentialsError
 import os
-from dotenv import load_dotenv
-
-load_dotenv()
 
 def download_image_from_s3(bucket_name, object_key):
 
