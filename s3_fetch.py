@@ -2,12 +2,15 @@ import streamlit as st
 import boto3
 from botocore.exceptions import NoCredentialsError
 import os
+from dotenv import load_dotenv
+
+load_dotenv()
 
 def download_image_from_s3(bucket_name, object_key):
 
-    os.environ["AWS_ACCESS_KEY_ID"] = "AKIAUCVRRS2K6T4FC27T"
-    os.environ["AWS_SECRET_ACCESS_KEY"] = "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"
-    os.environ["AWS_DEFAULT_REGION"] = "us-east-1"
+    os.environ["AWS_ACCESS_KEY_ID"] = os.getenv("AWS_ACCESS_KEY_ID")
+    os.environ["AWS_SECRET_ACCESS_KEY"] = os.getenv("AWS_SECRET_ACCESS_KEY")
+    os.environ["AWS_DEFAULT_REGION"] = os.getenv("AWS_DEFAULT_REGION")
 
     s3 = boto3.client('s3')
 

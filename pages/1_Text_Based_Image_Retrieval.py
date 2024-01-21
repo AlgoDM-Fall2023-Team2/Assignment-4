@@ -3,6 +3,10 @@ import requests
 from s3_fetch import download_image_from_s3
 from PIL import Image
 from io import BytesIO
+from dotenv import load_dotenv
+import os
+
+load_dotenv()
 
 st.set_page_config(layout="wide", page_title="Text Based Image Retrieval")
 st.title("Text Based Image Retrieval")
@@ -28,12 +32,12 @@ Give it a try and experience the power of text-based image retrieval with our in
 st.markdown(markdown_content)
 st.markdown("---")
 
-fastapi_url = "http://localhost:8000"
-s3_bucket_name = "smalladmbucket"
+FASTAPI_URL = os.getenv("FASTAPI_URL")
+S3_BUCKET_NAME = os.getenv("S3_BUCKET_NAME")
 
 
 def retrieve_closest_image(text):
-    response = requests.get(f"{fastapi_url}/retrieve_closest_image", params={"text": text})
+    response = requests.get(f"{FASTAPI_URL}/retrieve_closest_image", params={"text": text})
     return response.json()
 
 st.markdown("## Enter text description:")
@@ -42,7 +46,7 @@ if st.button("Retrieve Closest Image"):
     closest_images = retrieve_closest_image(text_input)
 
     for closest_image in closest_images:
-        image_data = download_image_from_s3(s3_bucket_name, f'img/{closest_image}.jpg')
+        image_data = download_image_from_s3(S3_BUCKET_NAME, f'img/{closest_image}.jpg')
         image = Image.open(BytesIO(image_data))
         image = image.resize((200, 200))
         st.image(image)
